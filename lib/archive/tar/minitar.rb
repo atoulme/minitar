@@ -63,7 +63,7 @@ class Archive::Tar::PosixHeader
   HEADER_UNPACK_FORMAT  = "Z100A8A8A8A12A12A8aZ100A6A2Z32Z32A8A8Z155"
 
     # Creates a new PosixHeader from a data stream.
-  def self.new_from_stream(stream)
+  def self.new_from_stream(stream, long_name = nil)
     data = stream.read(512)
     fields    = data.unpack(HEADER_UNPACK_FORMAT)
     name      = fields.shift
@@ -85,7 +85,13 @@ class Archive::Tar::PosixHeader
 
     empty = (data == "\0" * 512)
 
-    new(:name => name, :mode => mode, :uid => uid, :gid => gid,
+    if typeflag == 'L' && name == '././@LongLink'
+	long_name = stream.read(512).rstrip
+	return new_from_stream(stream, long_name)
+    end
+
+    new(:name => long_name || name,
+	:mode => mode, :uid => uid, :gid => gid,
         :size => size, :mtime => mtime, :checksum => checksum,
         :typeflag => typeflag, :magic => magic, :version => version,
         :uname => uname, :gname => gname, :devmajor => devmajor,
