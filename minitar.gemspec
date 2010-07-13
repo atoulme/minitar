@@ -2,9 +2,9 @@ Gem::Specification.new do |s|
   s.name = %{minitar}
   s.version = %{0.5.3}
   s.author = %{Austin Ziegler, Mauricio Fernandez, Antoine Toulme}
-  s.email = %{minitar@halostatue.ca}
-  s.homepage = %{http://rubyforge.org/projects/ruwiki/}
-  s.rubyforge_project = %{ruwiki}
+  s.email = %{antoine@lunar-ocean.com}
+  s.homepage = %{http://www.github.com/atoulme/minitar}
+  #s.rubyforge_project = %{ruwiki}
 
   s.files = Dir.glob("**/*").delete_if do |item|
     item.include?("CVS") or item.include?(".svn") or

@@ -2,6 +2,9 @@ Revision history for Ruby library Archive::Tar::Minitar. Unless explicitly
 noted otherwise, all changes are produced by Austin Ziegler
 <austin@rubyforge.org>.
 
+== 0.5.3
+* Fix for long names (http://rubyforge.org/tracker/index.php?func=detail&aid=22628&group_id=84&atid=407)
+
 == 0.5.2
 * Fixed a Ruby 1.9 compatibility error.
 
