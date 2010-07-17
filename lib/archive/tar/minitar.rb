@@ -86,8 +86,8 @@ class Archive::Tar::PosixHeader
     empty = (data == "\0" * 512)
 
     if typeflag == 'L' && name == '././@LongLink'
-	long_name = stream.read(512).rstrip
-	return new_from_stream(stream, long_name)
+	    long_name = stream.read(512).rstrip
+    	return new_from_stream(stream, long_name)
     end
 
     new(:name => long_name || name,

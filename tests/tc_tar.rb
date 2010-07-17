@@ -465,6 +465,7 @@ class TC_Tar__Input < Test::Unit::TestCase
   require 'rbconfig'
 
   TEST_TGZ = "\037\213\010\000\001B1A\000\vKI,I\324+I,\322K\257b\240\0250\000\002sSS\254\342 `dj\306``nnnbndbjd\000\0247336`P0\240\231\213\220@i1\320\367@+\351a\327 \004\362\335\034\f\313\034\r\035\031\270\337Ns\344b2\344q\335\375M\304\266QM1W\357\321>\221U\021\005\246\306\367\356\367u3\262;\212\004\265\236\\\334}\351,\377\037;\217\223\301e\247\030\024\\\236\211\277\347\346sii\265\010\330\355\234\240\362\274\371[\202\361\366\302S\316\335o&~m\237r\355\377\303\230\365\352WNW\334\266_\373\273\237\347Q\315t?\263{\377?\006\271\337?\367\207\325\346]\371\376y\307_\234~d\3772\265\346\261}\323\317\373\315\352\377O\376\271/\305\377?X\253\324\303S\373\361\347\277\372^)\267\377\363\03460\331\311\\wW|\031\203\300@\207\325p\004i\2319\251\3064\266\203P\376702B\313\377\246\246\006&\243\371\237\036 $#\263X\001\210@\351@\301XO\201\227k\240]4\nF\301(\030\005\243\200\036\000\000\004\330t\023\000\f\000\000"
+  TEST_LONG_ENTRY_TGZ = "\037\213\b\000\022LAL\000\003\355\323Kn\3020\020\006`\2579EN\020l\3428\333\036 w\210\fq!\305\261\301\017H8=\345QJ\027\024\251*\251\250\376o1\036yF\262ek\322q:~)\255\231\227\215Y\222\307\240'\267V\232\361\374\222\037\367\031\313EA\222\362A\367\371\"\372 ]\222\020gm\370\256\357^\375I\371\270R\256\252\217\361:W]p\322\272\2721\322\365\225SR\353\276\332(w\016>Nu\323\352KENg\265z\235/\232\267\245n\215]\255\235\017q\263\355\372]\025\224\017\237a\350\363\322\320\375\307o\3735C\374\307a\250\005\347\207\031gEN\257\3273A\030\343\023:\341y\221\275\367e\2023A\022:\304\003|\314\177\260Q\267J\232[}\367\352Oj\241\264\266\243\277\276\005\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\374\324\036\373\275\021\004\000(\000\000"
   FILETIMES = Time.utc(2004,"jan",1,5,0,0).to_i
 
   TEST_CONTENTS = [
@@ -560,6 +561,20 @@ class TC_Tar__Input < Test::Unit::TestCase
       end
       assert_equal(1, ii)
     end
+  end
+  
+  def test_extract_long_file_name_entry_works
+     gzr = Zlib::GzipReader.new(StringIO.new(TEST_LONG_ENTRY_TGZ))
+     Input.open(gzr) do |is|
+       ii = 0
+       is.each_with_index do |entry, ii|
+         assert_equal("super_duper_super_duper_extraordinary_really_very_very_sublimly_really_abcdefghijklmnopqrstuvwxyz_test_test_testsuper_duper_super_duper_extraordinary_really_very_very_sublimly_really_abcdefghijklmnopqrstuvwxyz_test_test_test.txt", entry.name)
+         is.extract_entry("data__", entry)
+         name = File.join("data__", entry.name)
+         assert(File.file?(name))
+       end
+       assert_equal(0, ii)
+     end
   end
 end
 
