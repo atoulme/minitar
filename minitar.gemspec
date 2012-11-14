@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %{minitar}
-  s.version = %{0.5.3}
+  s.version = %{0.5.4}
   s.author = %{Austin Ziegler, Mauricio Fernandez, Antoine Toulme}
   s.email = %{antoine@lunar-ocean.com}
   s.homepage = %{http://www.github.com/atoulme/minitar}
