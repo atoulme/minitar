@@ -517,7 +517,7 @@ module Archive::Tar::Minitar
 
         # Returns +true+ if the entry represents a plain file.
       def file?
-        @typeflag == "0"
+        @typeflag == "0" or @typeflag == "\0"
       end
       alias_method :file, :file?
 
