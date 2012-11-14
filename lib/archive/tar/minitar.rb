@@ -231,7 +231,7 @@ require 'find'
   # modified under the terms of the GPL version 2 (or later) or Ruby's
   # licence.
 module Archive::Tar::Minitar
-  VERSION = "0.5.2"
+  VERSION = "0.5.3"
 
     # The exception raised when a wrapped data stream class is expected to
     # respond to #rewind or #pos but does not.
