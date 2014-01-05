@@ -4,6 +4,7 @@ Gem::Specification.new do |s|
   s.author = %{Austin Ziegler, Mauricio Fernandez, Antoine Toulme}
   s.email = %{antoine@lunar-ocean.com}
   s.homepage = %{http://www.github.com/atoulme/minitar}
+  s.licenses = ['GPL2', 'Ruby']
   #s.rubyforge_project = %{ruwiki}
 
   s.files = Dir.glob("**/*").delete_if do |item|
