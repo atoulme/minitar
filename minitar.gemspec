@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.version = %{0.5.4}
   s.author = %{Austin Ziegler, Mauricio Fernandez, Antoine Toulme}
   s.email = %{antoine@lunar-ocean.com}
-  s.homepage = %{http://www.github.com/atoulme/minitar}
+  s.homepage = %{https://github.com/atoulme/minitar}
   s.licenses = ['GPL2', 'Ruby']
   #s.rubyforge_project = %{ruwiki}
 
